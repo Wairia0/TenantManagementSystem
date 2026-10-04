@@ -8,6 +8,11 @@ android {
         version = release(37)
     }
 
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.tenantmanagementsystem"
         minSdk = 24
