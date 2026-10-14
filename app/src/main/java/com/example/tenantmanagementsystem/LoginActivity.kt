@@ -26,9 +26,11 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("USER_EMAIL", email)
             startActivity(intent)
             finish()
         }
+
         binding.registerTextView.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
