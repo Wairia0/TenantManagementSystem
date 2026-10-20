@@ -1,5 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
+
+    // NEW: switch Safe Args on for this app.
+    // It must come BELOW the android.application line
+
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -42,6 +47,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
+    implementation("androidx.navigation:navigation-fragment-ktx:2.9.8")
+    implementation("androidx.navigation:navigation-ui-ktx:2.9.8")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
