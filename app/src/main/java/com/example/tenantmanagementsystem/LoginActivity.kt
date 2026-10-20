@@ -6,12 +6,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tenantmanagementsystem.databinding.ActivityLoginBinding
 import android.net.Uri
+import android.util.Log
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
+    companion object {
+        private const val TAG = "LoginLifecycle"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "LoginActivity: onCreate")
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val registeredEmail = intent.getStringExtra("EMAIL")
@@ -40,5 +47,35 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.strathmore.edu"))
             startActivity(intent)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "LoginActivity: onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "LoginActivity: onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "LoginActivity: onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "LoginActivity: onStop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "LoginActivity: onRestart")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "LoginActivity: onDestroy")
     }
 }

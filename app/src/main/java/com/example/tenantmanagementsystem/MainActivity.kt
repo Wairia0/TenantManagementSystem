@@ -10,6 +10,7 @@ import android.util.Log
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var lastTenant: Tenant? = null
+    private var saveCount: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -24,6 +25,11 @@ class MainActivity : AppCompatActivity() {
     // savedInstanceState is the Bundle we filled in onSaveInstanceState().
     // It is null the FIRST time the Activity opens (nothing saved yet).
         if (savedInstanceState != null) {
+            saveCount = savedInstanceState.getInt("save_count", 0)
+
+            Toast.makeText(
+                this, "SAVE tapped $saveCount times", Toast.LENGTH_LONG
+            ).show()
     // Read each value back using the SAME keys we saved with
             val name = savedInstanceState.getString("tenant_name")
             val phone = savedInstanceState.getString("tenant_phone")
@@ -42,6 +48,8 @@ class MainActivity : AppCompatActivity() {
             Toast.LENGTH_LONG).show()
 
         binding.saveButton.setOnClickListener {
+            saveCount++
+
             val name = binding.tenantNameEditText.text.toString()
             val phone = binding.phoneEditText.text.toString()
             val rent = binding.rentEditText.text.toString()
@@ -97,6 +105,10 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         Log.d("TENANT_LIFECYCLE", "MainActivity: onSaveInstanceState")
+
+        // Save the SAVE button tap count
+        outState.putInt("save_count", saveCount)
+
         // Copy into a val so Kotlin knows it can't change after the check
         val tenant = lastTenant
         if (tenant != null) {
